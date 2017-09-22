@@ -1,0 +1,156 @@
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Vending Machine</title>
+<style type="text/css">
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script language="javascript" type="text/javascript">
+$(document).ready(function () {
+    var socket = new WebSocket("ws://163.18.2.157:8000/");
+
+    socket.onopen = function(event){
+        socket.send("token");
+        }
+    socket.onmessage = function(event) {
+        $("#message").append("<div>" + event.data + "</div>");
+    }
+
+    $("#send").click(function() {
+        socket.send($("#text").val());
+        $("#text").val("").select();
+    });
+
+    $("#START").mousedown(function() {
+        socket.send('START');
+    });
+    $("#START").mouseup(function() {
+        socket.send('OPEN');
+    });
+    $("#GELD_ONE").mousedown(function() {
+        socket.send('GELD_ONE');
+    });
+
+    $("#GELD_ONE").mouseup(function() {
+                socket.send('GELD_ONE');
+    });
+    $("#GELD_TWO").mousedown(function() {
+        socket.send('GELD_TWO');
+    });
+    $("#GELD_TWO").mouseup(function() {
+        socket.send('GELD_TWO');
+    });
+    $("#GELD_THREE").mousedown(function() {
+        socket.send('GELD_THREE');
+    });
+    $("#GELD_THREE").mouseup(function() {
+        socket.send('GELD_THREE');
+    });
+    $("#GELD_FOUR").mousedown(function() {
+        socket.send('GELD_FOUR');
+    });
+    $("#GELD_FOUR").mouseup(function() {
+        socket.send('GELD_FOUR');
+    });
+    $("#GELD_FIVE").mousedown(function() {
+        socket.send('GELD_FIVE');
+    });
+    $("#GELD_FIVE").mouseup(function() {
+        socket.send('GELD_FIVE');
+    });
+    $("#GELD_SIX").mousedown(function() {
+        socket.send('GELD_SIX');
+    });
+    $("#GELD_SIX").mouseup(function() {
+        socket.send('GELD_SIX');
+    });
+    $("#GELD_SEVEN").mousedown(function() {
+        socket.send('GELD_SEVEN');
+    });
+    $("#GELD_SEVEN").mouseup(function() {
+        socket.send('GELD_SEVEN');
+    });
+    $("#GELD_EIGHT").mousedown(function() {
+        socket.send('GELD_EIGHT');
+    });
+    $("#GELD_EIGHT").mouseup(function() {
+        socket.send('GELD_EIGHT');
+    });
+    $("#END").mousedown(function() {
+        socket.send('END');
+    });
+    $("#END").mouseup(function() {
+        socket.send('close');
+        socket.onclose()
+    });
+});
+</script>
+</head>
+<body background="http://www.planwallpaper.com/static/images/recycled_texture_background_by_sandeep_m-d6aeau9_PZ9chud.jpg" id="text">
+<center><img src="https://i.imgur.com/UXe440X.png" width="50%" height="20%"></center>
+<br>
+<br>
+<center>
+    <button class="button" style="vertical-align:middle" id="START" value="Start"><span>Start </span></button>
+</center>
+<div style="color:#c40315;font-size:18px;" id="message" ></div>
+<br>
+<br>
+<br>
+<br>
+<center>
+<input type="button" id="GELD_ONE" value="1" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+<input type="button" id="GELD_TWO" value="2" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+<input type="button" id="GELD_THREE" value="3" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+<input type="button" id="GELD_FOUR" value="4" style="width:100px;height:50px;background-color:#F0F0F0;"/><br><br>
+<input type="button" id="GELD_FIVE" value="5" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+<input type="button" id="GELD_SIX" value="6" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+<input type="button" id="GELD_SEVEN" value="7" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+<input type="button" id="GELD_EIGHT" value="8" style="width:100px;height:50px;background-color:#F0F0F0;"/>
+</center>
+<br>
+<br>
+<br>
+<br>
+<center><button class="button" style="vertical-align:middle" id="END" value="Stop"><span>Stop </span></button></center>
+</body>
+</html>
